@@ -51,6 +51,36 @@
 
   - 测试授权流程之前先注册用户 . code 代表授权码 ; accessToken 代表访问令牌
 
+  ### client
+
+  client 会利用 redirect uri 的路由, 携带上面 server 返回的授权码 code , '暗中'请求服务端的访问令牌 token :
+
+  ```
+  router.get('/auth/redirect', controller.auth.redirect);
+  ```
+
+```
+  async redirect(){
+    console.log(this.ctx.query)
+    const result = await this.ctx.curl('http://127.0.0.1:7001/users/token', {
+      dataType: 'json',
+      // contentType: 'application/x-www-form-urlencoded', // 默认格式
+      method: 'POST',
+      timeout: 3000,
+      data: {
+        grant_type: 'authorization_code',
+        code: this.ctx.query.code,
+        state: this.ctx.query.state,
+        client_id: client_id,
+        client_secret: client_secret,
+        redirect_uri: redirect_uri,
+      }
+    });
+    this.ctx.body = result.data;
+  }
+}
+```
+
 
    <img src="./img/auth.png" style="width:800px; margin: 180px auto;"  />
 
