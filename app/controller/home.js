@@ -4,7 +4,7 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    // 发送/token
+    
     console.log(this.ctx.query)
     const result = await this.ctx.curl('http://127.0.0.1:7001/users/token', {
       dataType: 'json',

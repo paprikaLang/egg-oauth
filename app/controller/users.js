@@ -18,8 +18,8 @@ class UsersController extends Controller {
       lastname: 'Lang',
     });
     const client = await this.ctx.model.Client.add({
-      clientId: 'awefawedfa',
-      clientSecret: 'fawefawefdawedavawegvawvwavaw', 
+      clientId: 'hyewfbgawd',
+      clientSecret: 'fskefgtarwdbawydrawpdpaiuiawdtg', 
       redirectUri: 'http://127.0.0.1:7002/auth/redirect',
       grants: 'password,authorization_code,refresh_token,client_credentials'
     });
