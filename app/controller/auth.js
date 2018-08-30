@@ -28,6 +28,7 @@ class AuthController extends Controller {
     });
     //几种grant_type, 获取token查看 
     console.log(result.data);
+    //this.ctx.query & this.ctx.body 就是 重定向和异步POST请求的区别
     this.ctx.body = result.data;
   }
 }
