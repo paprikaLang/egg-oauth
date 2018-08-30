@@ -8,9 +8,9 @@ const redirect_uri = 'http://127.0.0.1:7002/auth/redirect'
 
 class AuthController extends Controller {
 
-  // oAuth登陆成功后跳转，拿token换资源
+  // oAuth:app.oAuth2Server.authorize()生成code后根据redirect_uri跳转回auth.js的redirect方法，以授权码验证获取令牌token
   async redirect(){
-    // 发送/token
+    // 返回的query中有code授权码, 是await result 等待 server:app.oAuth2Server.token() 生成token, 再通过users.js 的 async token 返回token
     console.log(this.ctx.query)
     const result = await this.ctx.curl('http://127.0.0.1:7001/users/token', {
       dataType: 'json',
@@ -26,6 +26,8 @@ class AuthController extends Controller {
         redirect_uri: redirect_uri,
       }
     });
+    //几种grant_type, 获取token查看 
+    console.log(result.data);
     this.ctx.body = result.data;
   }
 }

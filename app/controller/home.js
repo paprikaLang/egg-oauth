@@ -11,7 +11,7 @@ class HomeController extends Controller {
     await this.ctx.render('oauth/login.html')
   }
 
-  // 登录判断跳转
+  // 登陆之前重定向到服务端获取授权码,然后服务端按照redirect_uri将code传递给auth.js的redirect方法
   async login(){
     this.ctx.redirect(`http://127.0.0.1:7001/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}`)
   }
